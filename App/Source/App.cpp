@@ -1,6 +1,11 @@
-#include "Core/Core.h"
+#include <Core/io.h>
+
+namespace ns = core;
 
 int main()
 {
-	Core::PrintHelloWorld();
+    ns::cout << "Hello World from coreLib\n";
+    ns::cout << "Example value: " << 42 << '\n';
+
+    return 0;
 }
