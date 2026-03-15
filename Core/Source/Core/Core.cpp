@@ -1,12 +1,13 @@
 #include "Core.h"
 
-#include <iostream>
+#include "io.h"
 
-namespace Core {
+namespace core {
 
 	void PrintHelloWorld()
 	{
-		std::cout << "Hello World!\n";
+		ns::cout << "Hello World from coreLib\n";
+    	ns::cout << "Example value: " << 42 << '\n';
 		std::cin.get();
 	}
 
