@@ -1,24 +1,90 @@
-# C++ Project Starter Template
+````markdown
+# coreLib
 
-This is a little quick-start project template for C++ projects which utilise a Core/App project architecture. There are two included projects - one called _Core_, and one called _App_. [Premake](https://github.com/premake/premake-core) is used to generate project files.
+coreLib is an experimental C++ project for rebuilding foundational library components from first principles.
 
-Core builds into a static library and is meant to contain common code intended for use in multiple applications. App builds into an executable and links the Core static library, as well as provides an include path to Core's code.
+This project uses a Core/App architecture:
 
-The `Scripts/` directory contains build scripts for Windows and Linux, and the `Vendor/` directory contains Premake binaries (currently version `5.0-beta2`).
+- `Core` builds into a static library.
+- `App` builds into an executable and links against `Core`.
+- Library code lives in the `core` namespace.
+- `App` is used for testing and exploration.
 
-## Getting Started
-1. Clone this repository or use the "Use this template" button on GitHub to quickly set up your own repository based on this template
-2. `App/` and `Core/` are the two projects - you can edit the names of these folders and their contents to suit
-3. The three included Premake build files are `Build.lua`, `Core/Build-Core.lua` and `App/Build-App.lua` - you can edit these to customise your build configurations, edit the names of your projects and workspace/solution, etc.
-4. Open the `Scripts/` directory and run the appropriate `Setup` script to generate projects files. You can edit the setup scripts to change the type of project that is generated - out of the box they are set to Visual Studio 2022 for Windows and gmake2 for Linux.
+## Structure
 
-Note that no macOS setup script is currently provided; you can duplicate the Linux script and adjust accordingly.
+```text
+coreLib
+│
+├─ Core
+│  └─ Source
+│     └─ core
+│
+├─ App
+│  └─ Source
+│
+├─ Scripts
+├─ Vendor
+└─ Build.lua
+````
 
-## Included
-- Some example code (in `App/Source` and `Core/Source`) to provide a starting point and test
-- Simple `.gitignore` to ignore project files and binaries
-- Premake binaries for Win/Mac/Linux (`v5.0-beta2`)
+## Core
+
+`Core` contains the reusable library code.
+
+Library code should live inside the `core` namespace:
+
+```cpp
+namespace core
+{
+
+}
+```
+
+Application code may use a namespace alias:
+
+```cpp
+namespace ns = core;
+```
+
+Example:
+
+```cpp
+ns::cout << "Hello from coreLib\n";
+```
+
+## App
+
+`App` is the executable project.
+
+It is mainly used to test and experiment with the code in `Core`.
+
+## Build System
+
+This project uses Premake to generate project files.
+
+Important files:
+
+* `Build.lua`
+* `Core/Build-Core.lua`
+* `App/Build-App.lua`
+
+On Windows, run:
+
+```text
+Scripts/Setup-Windows.bat
+```
+
+Then open the generated Visual Studio solution.
+
+
+## Credits
+
+This project is based on a C++ Core/App project template using Premake from The Cherno.
+
+Premake binaries are included in `Vendor/`.
 
 ## License
-- UNLICENSE for this repository (see `UNLICENSE.txt` for more details)
-- Premake is licensed under BSD 3-Clause (see included LICENSE.txt file for more details)
+
+The original template is released under the UNLICENSE.
+
+Premake is licensed under the BSD 3-Clause license.
